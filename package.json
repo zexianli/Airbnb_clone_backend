@@ -1,0 +1,23 @@
+{
+  "name": "airbnb_clone_backend",
+  "version": "1.0.0",
+  "description": "Backend for airbnb full stack clone",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zexianli/Airbnb_clone_backend.git"
+  },
+  "author": "Zexian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zexianli/Airbnb_clone_backend/issues"
+  },
+  "homepage": "https://github.com/zexianli/Airbnb_clone_backend#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

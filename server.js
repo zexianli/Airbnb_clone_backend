@@ -3,24 +3,9 @@ const morgan = require('morgan');
 const api = require('./api');
 const { connectToDB } = require('./lib/mongo');
 const { ApolloServer, gql } = require('apollo-server-express');
-
-const typeDefs = gql`
-  type Query {
-    hello: String!
-  }
-`;
-
-const resolvers = {
-  Query: {
-    hello: () => 'hello',
-  },
-};
-
-// app.use('/', api);
-
-// app.use('*', (req, res, next) => {
-//   res.send('Hello World!');
-// });
+const { typeDefs } = require('./schema/typeDefs');
+const { resolvers } = require('./schema/resolvers');
+const router = require('./api');
 
 async function startApolloServer(typeDefs, resolvers) {
   const app = express();
@@ -36,10 +21,19 @@ async function startApolloServer(typeDefs, resolvers) {
 
   await server.start();
   server.applyMiddleware({ app });
+
+  app.use('/', api);
+
+  app.use('*', (req, res, next) => {
+    res.send('Hello World!');
+  });
+
   connectToDB(async () => {
     app.listen(port, () => {
       console.log(
-        `🚀 Server ready at http://localhost:${port}${server.graphqlPath}`
+        `🚀 Server ready at http://localhost:${port}`,
+        `\n`,
+        `🚀 Graphql ready at http://localhost:${port}${server.graphqlPath}`
       );
     });
   });
